@@ -10,14 +10,28 @@ const userSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+
     password: {
       type: String,
       required: [true, "Password is required."],
     },
+
     name: {
       type: String,
       required: [true, "Name is required."],
     },
+
+    image: String,
+
+    sustainableFisherNumber: {
+      type: String, 
+      trim: true, 
+      unique: true
+    },
+
+    fisheries: [
+      { type: Schema.Types.ObjectId, ref:'Fishery' } 
+    ],
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

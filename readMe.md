@@ -150,13 +150,13 @@ Components:
 
   sustainableFisherNumber : {type: String, trim: true, unique: true}
 
-  fisheries: [ { type: Schema.Types.ObjectId, ref:'Fisherie' } ]
+  fisheries: [ { type: Schema.Types.ObjectId, ref:'Fishery' } ]
 }
 ```
 
 
 
-**Fisherie model**
+**Fishery model**
 
 ```javascript
  {
@@ -170,7 +170,7 @@ Components:
    
    location: {lat: {type: String, required: true}, long: {type: String, required: true}},
 
-   overallWeight: {type: Number, default: null}
+   overallWeight: {type: Number, default: null},
 
    sustainableFisherNumber: String
  }
