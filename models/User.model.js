@@ -29,6 +29,8 @@ const userSchema = new Schema(
       default: null
     },
 
+    fishes: [{ type: Schema.Types.ObjectId, ref:'Fish' }],
+
     fisheries: [
       { type: Schema.Types.ObjectId, ref:'Fishery' } 
     ],

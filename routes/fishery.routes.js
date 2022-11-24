@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Fishery = require("../models/Fishery.model")
 const User = require("../models/User.model")
+const Fish = require("../models/Fish.model")
 
 //POST create fishery and add it to user
 
@@ -14,7 +15,7 @@ router.post("/fisheries", async (req, res, next) => {
             location,
             overallWeight,
             fishes,
-            userId,//delete this
+            userId,
         } = req.body
 
         const createdFishery = await Fishery.create(
@@ -27,8 +28,13 @@ router.post("/fisheries", async (req, res, next) => {
                 fishes,
                 userId,
             });
-            
+
         await User.findByIdAndUpdate(userId, {$push:{fisheries: createdFishery._id}})
+        
+        fishes.forEach(async fish =>{
+            await Fish.findByIdAndUpdate(fish.species, {$inc: {totalAmountCatched: fish.amount}})
+        })
+
         res.status(201).json(createdFishery)
     } catch (error) {
         console.log(error)

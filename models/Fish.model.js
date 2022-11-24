@@ -22,13 +22,13 @@ const fishSchema = new Schema(
 
     minCatchWeight: {type: Number, default: null},
 
-    totalAmountCatched: {type: Number, default: null},
+    totalAmountCatched: {type: Number, default: 0},
 
     weight: {type: Number, default: null},
 
     length: {type: Number, default: null},
 
-    userCreated: {type: Boolean, default: false}
+    userId : {type: Schema.Types.ObjectId, ref: "User", default: null}
   },
   {
     timestamps: true
