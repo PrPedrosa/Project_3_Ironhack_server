@@ -64,6 +64,21 @@ router.get("/fisheries", async (req, res, next) => {
 //GET all user fisheries
 
 router.get("/userfisheries", async (req, res, next) => {
+    try {
+        const {userId} = req.body
+        const userFisheries = await Fishery.find({userId: userId}).populate({
+            path: "fishes",
+            populate: {
+                path: "species",
+                model: "Fish"
+            }
+        })
+
+        res.status(201).json(userFisheries)
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
 
 })
 
