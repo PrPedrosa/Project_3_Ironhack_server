@@ -2,29 +2,37 @@ const { Schema, model } = require("mongoose");
 
 const fisherySchema = new Schema(
     {
-      name: { type: String, required: true, unique: true },
+      number: { type: Number, unique: true, required: true },
 
-      image: { type: String },
-
-      fishes: [ 
-        {
-            species: {type: Schema.Types.ObjectId, ref:'Fish'},
-            amount: Number, 
-            weight: Number 
-        } 
-      ],
-
+      image: { type: String, default: "default pic" },
+      
       date: {type: String, required: true},
-   
-      location: String,
+
+      location: {
+        type: String,
+        enum: [
+          "Em frente à praia da Parede",
+          "Em frente à praia das Avencas",
+          "Em frente a praia de S. Pedro",
+          "Em frente à praia da Bafureira"
+        ]
+      },
       /* {
         lat: {type: String, required: true}, 
         long: {type: String, required: true}
       }, */
-
       overallWeight: {type: Number, default: null},
 
-      sustainableFisherNumber: String
+      userId: {type: Schema.Types.ObjectId, ref: "User"},
+
+      fishes: [ 
+        {
+            species: {type: Schema.Types.ObjectId, ref:'Fish'},
+            amount: {type: Number, default: null}, 
+            weight: {type: Number, default: null}
+        } 
+      ],
+
     },
     {
         timestamps: true

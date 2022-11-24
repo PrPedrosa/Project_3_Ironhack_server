@@ -21,12 +21,12 @@ const userSchema = new Schema(
       required: [true, "Name is required."],
     },
 
-    image: String,
+    image: {type: String, default: "default pic"},
 
     sustainableFisherNumber: {
       type: String, 
       trim: true, 
-      unique: true
+      default: null
     },
 
     fisheries: [

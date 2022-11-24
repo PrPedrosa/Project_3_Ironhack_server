@@ -4,7 +4,7 @@ const fishSchema = new Schema(
   {
     commonName: { type: String, required: true, unique: true, trim: true },
 
-    scientificName: {type: String, unique: true, trim: true},
+    scientificName: {type: String, trim: true, default: null},
 
     image: { type: String, default: "default pic"},
 
