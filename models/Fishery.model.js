@@ -27,7 +27,7 @@ const fisherySchema = new Schema(
 
       fishes: [ 
         {
-            species: {type: Schema.Types.ObjectId, ref:'Fish'},
+            species: String,
             amount: {type: Number, default: null}, 
             weight: {type: Number, default: null}
         } 

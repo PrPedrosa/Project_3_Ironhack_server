@@ -32,7 +32,7 @@ router.post("/fisheries", async (req, res, next) => {
         await User.findByIdAndUpdate(userId, {$push:{fisheries: createdFishery._id}})
         
         fishes.forEach(async fish =>{
-            await Fish.findByIdAndUpdate(fish.species, {$inc: {totalAmountCatched: fish.amount}})
+            await Fish.findOneAndUpdate({commonName: fish.species}, {$inc: {totalAmountCatched: fish.amount}})
         })
 
         res.status(201).json(createdFishery)
