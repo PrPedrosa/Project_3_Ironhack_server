@@ -21,7 +21,7 @@ const userSchema = new Schema(
       required: [true, "Name is required."],
     },
 
-    image: {type: String, default: "default pic"},
+    image: {type: String, default: "https://res.cloudinary.com/dirrmfung/image/upload/v1669491384/defaultUser-removebg-preview_wpyxid.png"},
 
     sustainableFisherNumber: {
       type: String, 

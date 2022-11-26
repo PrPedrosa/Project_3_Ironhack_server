@@ -6,7 +6,7 @@ const fishSchema = new Schema(
 
     scientificName: {type: String, trim: true, default: null},
 
-    image: { type: String, default: "default pic"},
+    image: { type: String, default: "https://res.cloudinary.com/dirrmfung/image/upload/v1669491554/fishDefault-removebg-preview_t1eqc2.png"},
 
     description: { type: String, trim: true, default: null},
 

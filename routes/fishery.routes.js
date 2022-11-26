@@ -9,6 +9,7 @@ const Fish = require("../models/Fish.model")
 router.post("/fisheries", async (req, res, next) => {
     try {
         const {
+            //number,
             date,
             location,
             overallWeight,
@@ -21,6 +22,7 @@ router.post("/fisheries", async (req, res, next) => {
             image = "https://res.cloudinary.com/dirrmfung/image/upload/v1669478014/defaultFishery_v3hol3.jpg"
         }
 
+        //if seeding 1st fishery, comment the below 3 lines and uncomment above number
         const allFisheries = await Fishery.find();
         const lastFishery = allFisheries[allFisheries.length-1]
         const number = lastFishery.number +1
