@@ -4,17 +4,17 @@ const fisherySchema = new Schema(
     {
       number: { type: Number, unique: true, required: true },
 
-      image: { type: String, default: "default pic" },
+      image: { type: String, default: "https://res.cloudinary.com/dirrmfung/image/upload/v1669478014/defaultFishery_v3hol3.jpg" },
       
       date: {type: String, required: true},
 
       location: {
         type: String,
         enum: [
-          "Em frente à praia da Parede",
-          "Em frente à praia das Avencas",
-          "Em frente a praia de S. Pedro",
-          "Em frente à praia da Bafureira"
+          "Em frente a praia da Parede",
+          "Em frente a praia das Avencas",
+          "Em frente a praia de Sao Pedro",
+          "Em frente a praia da Bafureira"
         ]
       },
       /* {

@@ -9,14 +9,21 @@ const Fish = require("../models/Fish.model")
 router.post("/fisheries", async (req, res, next) => {
     try {
         const {
-            number,
-            image,
             date,
             location,
             overallWeight,
             fishes,
             userId,
         } = req.body
+        let {image} = req.body
+
+        if(!image) {
+            image = "https://res.cloudinary.com/dirrmfung/image/upload/v1669478014/defaultFishery_v3hol3.jpg"
+        }
+
+        const allFisheries = await Fishery.find();
+        const lastFishery = allFisheries[allFisheries.length-1]
+        const number = lastFishery.number +1
 
         const createdFishery = await Fishery.create(
             {
@@ -46,13 +53,13 @@ router.post("/fisheries", async (req, res, next) => {
 
 router.get("/fisheries", async (req, res, next) => {
     try {
-        const allFisheries = await Fishery.find().populate({
+        const allFisheries = await Fishery.find()/* .populate({
             path: "fishes",
             populate: {
                 path: "species",
                 model: "Fish"
             }
-        })
+        }) */
 
         res.status(201).json(allFisheries)
     } catch (error) {
