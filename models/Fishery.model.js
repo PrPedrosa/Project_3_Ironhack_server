@@ -8,6 +8,14 @@ const fisherySchema = new Schema(
       
       date: {type: String, required: true},
 
+      fishingType: {
+        type: String,
+        enum: [
+          "Caça submarina",
+          "Pesca com linha",
+        ]
+      },
+
       location: {
         type: String,
         enum: [
@@ -28,7 +36,7 @@ const fisherySchema = new Schema(
       fishes: [ 
         {
             species: String,
-            amount: {type: Number, default: null}, 
+            length: {type: Number, default: null}, 
             weight: {type: Number, default: null}
         } 
       ],

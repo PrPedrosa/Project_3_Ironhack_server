@@ -13,6 +13,7 @@ router.post("/fisheries", async (req, res, next) => {
             date,
             location,
             overallWeight,
+            fishingType,
             fishes,
             userId,
         } = req.body
@@ -34,6 +35,7 @@ router.post("/fisheries", async (req, res, next) => {
                 date,
                 location,
                 overallWeight,
+                fishingType,
                 fishes,
                 userId,
             });
@@ -41,7 +43,7 @@ router.post("/fisheries", async (req, res, next) => {
         await User.findByIdAndUpdate(userId, {$push:{fisheries: createdFishery._id}})
         
         fishes.forEach(async fish =>{
-            await Fish.findOneAndUpdate({commonName: fish.species}, {$inc: {totalAmountCatched: fish.amount}})
+            await Fish.findOneAndUpdate({commonName: fish.species}, {$inc: {totalAmountCatched: 1}})
         })
 
         res.status(201).json(createdFishery)
@@ -125,9 +127,10 @@ router.put("/fisheries/:id", async (req, res, next) => {
 
 //DELETE fishery
 
-router.delete("/fisheries/:id", async (req, res, next) =>{
+router.delete("/fisheries/:id/:userId", async (req, res, next) =>{
     try {
-      const {id} = req.params
+      const {id, userId} = req.params
+      await User.findByIdAndUpdate(userId, {$pull: {fisheries: id}})
       await Fishery.findByIdAndRemove(id)
       res.status(200).json({ message: `The Fishery was deleted successfully` });
     } catch (error) {

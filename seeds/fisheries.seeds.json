@@ -3,18 +3,19 @@
         "number": 1,
         "date": "2000-01-01",
         "location": "Praia da Parede",
-        "overallWeight": 14,
+        "overallWeight": 4,
         "userId": "",
+        "fishingType": "Pesca com linha",
         "fishes": [
             {
-                "species": "637f5f3b70b4e43a5df010f7",
-                "amount": 5,
-                "weight": 10
+                "species": "Dourada",
+                "length": 5,
+                "weight": 2
             },
             {
-                "species": "637f5f3b70b4e43a5df010f8",
-                "amount": 2,
-                "weight": 4
+                "species": "Robalo",
+                "length": 2,
+                "weight": 2
             }
         ]
     },

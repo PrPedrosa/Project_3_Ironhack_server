@@ -35,7 +35,7 @@ router.post("/userfishes", async (req, res, next) => {
 
 router.get("/fishes", async (req, res, next) => {
   try {
-    const allFishes = await Fish.find({userCreated: false})
+    const allFishes = await Fish.find({userId: null})
     res.status(200).json(allFishes)
 
   } catch (error) {
@@ -48,7 +48,7 @@ router.get("/fishes", async (req, res, next) => {
 
 router.get("/userfishes", async (req, res, next) => {
   try {
-    const allFishes = await Fish.find({userCreated: true})
+    const allFishes = await Fish.find( {userId: {$ne: null} })
     res.status(200).json(allFishes)
 
   } catch (error) {
@@ -87,9 +87,10 @@ router.put("/fishes/:id", async (req, res, next) => {
 
 //DELETE fish
 
-router.delete("/fishes/:id", async (req, res, next) =>{
+router.delete("/fishes/:id/:userId", async (req, res, next) =>{
   try {
-    const {id} = req.params
+    const {id, userId} = req.params
+    await User.findByIdAndUpdate(userId, {$pull: {fishes: id}})
     await Fish.findByIdAndRemove(id)
     res.status(200).json({ message: `The Fish was deleted successfully` });
 
