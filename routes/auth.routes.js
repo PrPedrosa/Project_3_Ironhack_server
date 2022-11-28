@@ -128,4 +128,38 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   res.status(200).json(req.payload);
 });
 
+//PUT edit a user
+
+router.put("/edit/user/:id", async (req, res, next) => {
+  try {
+    const {id} = req.params
+    const updatedUser = await User.findByIdAndUpdate(id, req.body, {new: true});
+    const { _id, email, name, image, sustainableFisherNumber, fishes, fisheries } = updatedUser;
+    const payload = { _id, email, name, image, sustainableFisherNumber, fishes, fisheries };
+
+    const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+      algorithm: "HS256",
+      expiresIn: "6h",
+    });
+
+    res.status(200).json({ authToken: authToken });
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+})
+
+//DELETE user
+
+router.delete("/delete/user/:id", async(req, res, next) => {
+  try {
+    const {id} = req.params
+    await User.findByIdAndRemove(id)
+    res.status(200).json({message: "Conta apagada com sucesso"})
+  } catch (error) {
+    console.log(error)
+    next(error)
+  }
+})
+
 module.exports = router;

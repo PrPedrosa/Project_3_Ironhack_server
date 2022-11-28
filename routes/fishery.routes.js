@@ -96,13 +96,13 @@ router.get("/userfisheries", async (req, res, next) => {
 router.get("/fisheries/:id", async (req, res, next) => {
     try {
         const {id} = req.params
-        const oneFishery = await Fishery.findById(id).populate({
+        const oneFishery = await Fishery.findById(id)/* .populate({
             path: "fishes",
             populate: {
                 path: "species",
                 model: "Fish"
             }
-        })
+        }) */
         res.status(201).json(oneFishery)
     } catch (error) {
         console.log(error)
