@@ -130,7 +130,7 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
 
 //PUT edit a user
 
-router.put("/edit/user/:id", async (req, res, next) => {
+router.put("/edit/user/:id", isAuthenticated, async (req, res, next) => {
   try {
     const {id} = req.params
     const updatedUser = await User.findByIdAndUpdate(id, req.body, {new: true});
@@ -151,7 +151,7 @@ router.put("/edit/user/:id", async (req, res, next) => {
 
 //DELETE user
 
-router.delete("/delete/user/:id", async(req, res, next) => {
+router.delete("/delete/user/:id", isAuthenticated, async(req, res, next) => {
   try {
     const {id} = req.params
     await User.findByIdAndRemove(id)

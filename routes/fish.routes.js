@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Fish = require("../models/Fish.model");
 const User = require("../models/User.model")
+const { isAuthenticated } = require("../middleware/jwt.middleware.js");
 
 //POST seed fishes
 
@@ -18,7 +19,7 @@ router.post("/fishes", async (req, res, next) => {
 
 //POST create a users best fish/catch
 
-router.post("/userfishes", async (req, res, next) => {
+router.post("/userfishes", isAuthenticated, async (req, res, next) => {
   try {
     const {userId} = req.body
     const createdFish = await Fish.create(req.body)
@@ -46,7 +47,7 @@ router.get("/fishes", async (req, res, next) => {
 
 //GET all (userCreated=true) fishes
 
-router.get("/userfishes", async (req, res, next) => {
+router.get("/userfishes", isAuthenticated, async (req, res, next) => {
   try {
     const allFishes = await Fish.find( {userId: {$ne: null} })
     res.status(200).json(allFishes)
@@ -59,7 +60,7 @@ router.get("/userfishes", async (req, res, next) => {
 
 //GET one fish
 
-router.get("/fishes/:id", async (req, res, next) => {
+router.get("/fishes/:id", isAuthenticated, async (req, res, next) => {
   try {
     const {id} = req.params
     const oneFish = await Fish.findById(id)
@@ -73,7 +74,7 @@ router.get("/fishes/:id", async (req, res, next) => {
 
 //PUT edit fish
 
-router.put("/fishes/:id", async (req, res, next) => {
+router.put("/fishes/:id", isAuthenticated, async (req, res, next) => {
   try {
     const {id} = req.params
     const updatedFish = await Fish.findByIdAndUpdate(id, req.body, {new: true})
@@ -87,7 +88,7 @@ router.put("/fishes/:id", async (req, res, next) => {
 
 //DELETE fish
 
-router.delete("/fishes/:id/:userId", async (req, res, next) =>{
+router.delete("/fishes/:id/:userId", isAuthenticated, async (req, res, next) =>{
   try {
     const {id, userId} = req.params
     await User.findByIdAndUpdate(userId, {$pull: {fishes: id}})

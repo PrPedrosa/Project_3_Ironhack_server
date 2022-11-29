@@ -15,6 +15,8 @@ const app = express();
 require("./config")(app);
 
 // 👇 Start handling routes here
+const { isAuthenticated } = require("./middleware/jwt.middleware.js");
+
 const indexRoutes = require("./routes/index.routes");
 app.use("/api", indexRoutes);
 
@@ -25,7 +27,7 @@ const fishRoutes = require("./routes/fish.routes");
 app.use("/api", fishRoutes);
 
 const fisheryRoutes = require("./routes/fishery.routes");
-app.use("/api", fisheryRoutes);
+app.use("/api", isAuthenticated, fisheryRoutes);
 
 const trashRoutes = require("./routes/trash.routes");
 app.use("/api", trashRoutes);
