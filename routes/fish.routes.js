@@ -36,7 +36,7 @@ router.post("/userfishes", isAuthenticated, async (req, res, next) => {
 
 router.get("/fishes", async (req, res, next) => {
   try {
-    const allFishes = await Fish.find({userId: null})
+    const allFishes = await Fish.find({userId: null}).sort({commonName: 1})
     res.status(200).json(allFishes)
 
   } catch (error) {
