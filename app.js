@@ -27,6 +27,9 @@ app.use("/api", fishRoutes);
 const fisheryRoutes = require("./routes/fishery.routes");
 app.use("/api", fisheryRoutes);
 
+const trashRoutes = require("./routes/trash.routes");
+app.use("/api", trashRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
