@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 
 const fishSchema = new Schema(
   {
-    commonName: { type: String, required: true, unique: true, trim: true },
+    commonName: { type: String, required: true, trim: true },
 
     scientificName: {type: String, trim: true, default: null},
 

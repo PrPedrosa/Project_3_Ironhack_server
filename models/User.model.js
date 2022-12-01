@@ -5,7 +5,7 @@ const userSchema = new Schema(
   {
     email: {
       type: String,
-      required: [true, "Email is required."],
+      required: [true, "Por favor insira o Email"],
       unique: true,
       lowercase: true,
       trim: true,
@@ -13,12 +13,12 @@ const userSchema = new Schema(
 
     password: {
       type: String,
-      required: [true, "Password is required."],
+      required: [true, "Por favor insira a Password."],
     },
 
     name: {
       type: String,
-      required: [true, "Name is required."],
+      required: [true, "Por favor insira um Nome."],
     },
 
     image: {type: String, default: "https://res.cloudinary.com/dirrmfung/image/upload/v1669491384/defaultUser-removebg-preview_wpyxid.png"},
